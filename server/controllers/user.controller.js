@@ -41,6 +41,42 @@ class UserController {
       next(error);
     }
   }
+
+  /**
+   * @type {import("express").RequestHandler}
+   *
+   */
+  async updateById(req, res, next) {
+    try {
+      const user = await userService.getById(req.params.id);
+
+      if (!user) {
+        res.status(404).json({ message: "User not found" });
+      }
+
+      res.send(await userService.update(req.params.id, req.body));
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  /**
+   * @type {import("express").RequestHandler}
+   *
+   */
+  async deleteById(req, res, next) {
+    try {
+      const user = await userService.getById(req.params.id);
+
+      if (!user) {
+        res.status(404).json({ message: "User not found" });
+      }
+
+      res.send(await userService.delete(req.params.id));
+    } catch (error) {
+      next(error);
+    }
+  }
 }
 
 module.exports = new UserController();

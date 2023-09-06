@@ -37,6 +37,27 @@ class UserService {
 
     return user;
   }
+
+  async update(id, user) {
+    const updatedUser = await this.#client.user.update({
+      where: {
+        id: parseInt(id),
+      },
+      data: user,
+    });
+
+    return updatedUser;
+  }
+
+  async delete(id) {
+    const deletedUser = await this.#client.user.delete({
+      where: {
+        id: parseInt(id),
+      },
+    });
+
+    return deletedUser;
+  }
 }
 
 module.exports = new UserService();
