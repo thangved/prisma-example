@@ -1,39 +1,39 @@
-import createClient from "../utils/client";
+import createClient from '../utils/client';
 
 class UserService {
-  #client;
+	#client;
 
-  constructor() {
-    this.#client = createClient("users");
-  }
+	constructor() {
+		this.#client = createClient('users');
+	}
 
-  async createUser(user) {
-    const newUser = await this.#client.post("/", user);
+	async createUser(user) {
+		const newUser = await this.#client.post('/', user);
 
-    return newUser;
-  }
+		return newUser;
+	}
 
-  async getAllUsers() {
-    const users = await this.#client.get("/");
+	async getAllUsers() {
+		const users = await this.#client.get('/');
 
-    return users;
-  }
+		return users;
+	}
 
-  async getUserById(id) {
-    const user = await this.#client.get(`/${id}`);
+	async getUserById(id) {
+		const user = await this.#client.get(`/${id}`);
 
-    return user;
-  }
+		return user;
+	}
 
-  async updateUserById(id, user) {
-    const updatedUser = await this.#client.put(`/${id}`, user);
+	async updateUserById(id, user) {
+		const updatedUser = await this.#client.put(`/${id}`, user);
 
-    return updatedUser;
-  }
+		return updatedUser;
+	}
 
-  async deleteUserById(id) {
-    await this.#client.delete(`/${id}`);
-  }
+	async deleteUserById(id) {
+		await this.#client.delete(`/${id}`);
+	}
 }
 
 export default new UserService();
